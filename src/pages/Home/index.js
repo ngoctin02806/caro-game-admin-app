@@ -2,23 +2,25 @@ import React, { useState, useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Redirect } from "react-router-dom";
 
-import { getCurrentUser } from "../../service/auth-service";
+import GameDashboard from "../GameDashboard";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
+import AuthService from "../../service/auth-service";
 
 const Home = (props) => {
-  const [adminToken, setAdminToken] = useState("");
-
-  useEffect(() => {
-    setAdminToken(getCurrentUser());
-  }, []);
-
-  if (adminToken === null) return <Redirect to="/login" />;
+  if (AuthService.getCurrentUser() === null) return <Redirect to="/login" />;
   return (
     <HelmetProvider>
       <Helmet>
         <title>Admin Home</title>
         <meta name="description" content="Admin Home" />
       </Helmet>
-      <div> {adminToken}</div>
+      <div>
+        <Header />
+        <GameDashboard />
+        <Footer />
+      </div>
     </HelmetProvider>
   );
 };

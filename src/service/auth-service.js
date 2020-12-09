@@ -6,4 +6,4 @@ const logout = () => {
   localStorage.removeItem("accessToken");
 };
 
-export { getCurrentUser, logout };
+export default { getCurrentUser, logout };

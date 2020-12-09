@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import "./styles.css";
@@ -29,6 +29,7 @@ const tailLayout = {
 };
 
 const Login = (props) => {
+  const history = useHistory();
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isErr, setIsErr] = useState(false);
@@ -49,6 +50,8 @@ const Login = (props) => {
           setUser(userInfo);
           setLoggedIn(true);
           localStorage.setItem("accessToken", userInfo.auth.token);
+          history.push("/");
+          window.location.reload();
         } else {
           setIsErr(true);
           setMsgErr("This user is not admin");
@@ -63,8 +66,6 @@ const Login = (props) => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-
-  if (loggedIn) return <Redirect to="/" />;
 
   return (
     <HelmetProvider>

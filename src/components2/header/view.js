@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Dropdown, Menu } from "antd";
-import { Link } from "react-router-dom";
-import * as LocalStorage from "../../utils/localstorage";
 import styles from "./header.module.css";
 
 import {
@@ -13,15 +11,15 @@ import {
   MenuFoldOutlined,
 } from "@ant-design/icons";
 
+import AuthContext from "../../contexts/authContext";
+
 import AuthService from "../../service/auth-service";
 
 const menu = (
   <Menu>
     <Menu.Item key="1">
-      <Link to="/home/setting">
-        <SettingOutlined />
-        &nbsp;Setting
-      </Link>
+      <SettingOutlined />
+      &nbsp;Setting
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item
@@ -31,15 +29,14 @@ const menu = (
         window.location.reload();
       }}
     >
-      <Link to="/login">
-        <PoweroffOutlined />
-        &nbsp;Logout
-      </Link>
+      <PoweroffOutlined />
+      &nbsp;Logout
     </Menu.Item>
   </Menu>
 );
 
 const Header = ({ collapsed, setCollapsed }) => {
+  const userContext = useContext(AuthContext);
   return (
     <div className={styles["header-wrapper"]}>
       <span
@@ -52,7 +49,7 @@ const Header = ({ collapsed, setCollapsed }) => {
         <Dropdown overlay={menu} placement="bottomRight">
           <span className={styles["header-dropdown-link"]}>
             <UserOutlined />
-            {LocalStorage.get("TA-username")}
+            {userContext.profile.username}
             <DownOutlined />
           </span>
         </Dropdown>

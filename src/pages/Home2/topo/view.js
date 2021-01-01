@@ -1,11 +1,11 @@
-import React from 'react';
-import { injectIntl } from 'react-intl';
+import React from "react";
 
 const topoComponent = (props) => {
-  const { intl } = props;
   return (
-      <div>{ intl.formatMessage({id: 'topo.title'}) }</div>
+    <div>
+      <p>Topo</p>
+    </div>
   );
 };
 
-export default injectIntl(topoComponent);
+export default topoComponent;

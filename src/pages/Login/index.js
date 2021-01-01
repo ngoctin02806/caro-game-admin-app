@@ -12,6 +12,7 @@ import logo from "../../public/images/logo.svg";
 import Banner from "../../public/images/home-banner.png";
 
 import { BASE_API_URL } from "../../utils/constant";
+import AuthService from "../../service/auth-service";
 
 const layout = {
   labelCol: {
@@ -50,7 +51,8 @@ const Login = (props) => {
           setUser(userInfo);
           setLoggedIn(true);
           localStorage.setItem("accessToken", userInfo.auth.token);
-          history.push("/");
+          localStorage.setItem("expiredTokenDate", userInfo.auth.expire_in);
+          history.push("/home/overview");
           window.location.reload();
         } else {
           setIsErr(true);
@@ -66,6 +68,9 @@ const Login = (props) => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  const currentAuthToken = AuthService.getCurrentUser();
+  if (currentAuthToken !== "") return <Redirect to="/home/overview" />;
 
   return (
     <HelmetProvider>

@@ -58,7 +58,10 @@ const Sidebar = ({ collapsed }) => {
             return (
               <Menu.Item key={item.key}>
                 <Link to={item.url}>
-                  {/* <Icon type={item.icon} /> */}
+                  {item.icon === "home" && <HomeOutlined />}
+                  {item.icon === "fork" && <ForkOutlined />}
+                  {item.icon === "area-chart" && <AreaChartOutlined />}
+                  {item.icon === "setting" && <SettingOutlined />}
                   <span>{item.label}</span>
                 </Link>
               </Menu.Item>

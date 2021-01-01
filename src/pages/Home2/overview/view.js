@@ -1,10 +1,11 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React from "react";
 
 const overviewComponent = (props) => {
-	return (
-		<div><FormattedMessage id="overview.title" /></div>
-	);
+  return (
+    <div>
+      <p>Overview</p>
+    </div>
+  );
 };
 
 export default overviewComponent;

@@ -70,7 +70,7 @@ const Login = (props) => {
   };
 
   const currentAuthToken = AuthService.getCurrentUser();
-  if (currentAuthToken !== "") return <Redirect to="/home/overview" />;
+  if (currentAuthToken) return <Redirect to="/home/overview" />;
 
   return (
     <HelmetProvider>

@@ -7,6 +7,7 @@ import { view as Header } from "../../components2/header";
 import { view as Sidebar } from "../../components2/sidebar";
 import { view as Overview } from "./overview";
 import { view as Topo } from "./topo";
+import UserTable from "./UserTable";
 import styles from "./home.module.css";
 
 import AuthContext from "../../contexts/authContext";
@@ -49,8 +50,7 @@ const HomePage = () => {
   const now = new Date().getTime();
   if (expiredToken < now) {
     AuthService.logout();
-    window.location.reload();
-    return;
+    return <Redirect to="/login" />;
   }
 
   return (
@@ -79,7 +79,7 @@ const HomePage = () => {
             </div>
             <div className={`${styles.content} ant-layout-content`}>
               <Route path="/home/overview" component={Overview} />
-              <Route path="/home/topo" component={Topo} />
+              <Route path="/home/users-list" component={UserTable} />
             </div>
           </div>
         </div>

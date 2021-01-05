@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Menu } from "antd";
 import {
   HomeOutlined,
-  ForkOutlined,
+  UserOutlined,
   AreaChartOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
@@ -40,7 +40,7 @@ const Sidebar = ({ collapsed }) => {
                 title={
                   <span>
                     {item.icon === "home" && <HomeOutlined />}
-                    {item.icon === "fork" && <ForkOutlined />}
+                    {item.icon === "user" && <UserOutlined />}
                     {item.icon === "area-chart" && <AreaChartOutlined />}
                     {item.icon === "setting" && <SettingOutlined />}
                     <span>{item.label}</span>
@@ -59,7 +59,7 @@ const Sidebar = ({ collapsed }) => {
               <Menu.Item key={item.key}>
                 <Link to={item.url}>
                   {item.icon === "home" && <HomeOutlined />}
-                  {item.icon === "fork" && <ForkOutlined />}
+                  {item.icon === "user" && <UserOutlined />}
                   {item.icon === "area-chart" && <AreaChartOutlined />}
                   {item.icon === "setting" && <SettingOutlined />}
                   <span>{item.label}</span>

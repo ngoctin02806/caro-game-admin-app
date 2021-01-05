@@ -79,7 +79,10 @@ const HomePage = () => {
             </div>
             <div className={`${styles.content} ant-layout-content`}>
               <Route path="/home/overview" component={Overview} />
-              <Route path="/home/users-list" component={UserTable} />
+              <Route
+                path="/home/danh-sach-tai-khoan-nguoi-dung"
+                component={UserTable}
+              />
             </div>
           </div>
         </div>

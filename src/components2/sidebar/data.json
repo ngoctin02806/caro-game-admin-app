@@ -6,10 +6,10 @@
     "url": "/home/overview"
   },
   {
-    "icon": "fork",
+    "icon": "user",
     "key": "users-list",
-    "label": "users-list",
-    "url": "/home/users-list"
+    "label": "List of User Accounts",
+    "url": "/home/danh-sach-tai-khoan-nguoi-dung"
   },
   {
     "icon": "area-chart",

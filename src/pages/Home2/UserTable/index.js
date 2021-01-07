@@ -1,11 +1,19 @@
 import React, { useRef, useEffect, useState } from "react";
 import axios from "axios";
+import "./styles.css";
 
 import ProTable from "@ant-design/pro-table";
-import { Avatar } from "antd";
+import {
+  Avatar,
+  Badge,
+  Tag,
+  Popconfirm,
+  message,
+  Form,
+  Input,
+  Button,
+} from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { Tag } from "antd";
-import { Popconfirm, message, Button } from "antd";
 
 import { BASE_API_URL } from "../../../utils/constant";
 import AuthService from "../../../service/auth-service";
@@ -14,6 +22,8 @@ const UserTable = () => {
   const actionRef = useRef();
   const [listUsers, setListUsers] = useState([]);
   const [pageIsChaged, setPageIsChaged] = useState(false);
+  const [usernameSearchKey, setUsernameSearchKey] = useState("");
+  const [emailSearchKey, setEmailSearchKey] = useState("");
 
   const confirmUnblockUser = (userId) => {
     axios(`${BASE_API_URL}/api/v1/user/unblock/${userId}`, {
@@ -25,8 +35,9 @@ const UserTable = () => {
         setPageIsChaged(true);
       })
       .catch((err) => {
-        console.log(err);
-        message.error("Something is error");
+        if (err.response) {
+          message.error(err.response.data.errors[0].message);
+        }
       });
   };
 
@@ -40,9 +51,32 @@ const UserTable = () => {
         setPageIsChaged(true);
       })
       .catch((err) => {
-        console.log(err);
-        message.error("Something is error");
+        if (err.response) {
+          message.error(err.response.data.errors[0].message);
+        }
       });
+  };
+
+  const handleSearchSubmit = async () => {
+    const rs = await axios(
+      `${BASE_API_URL}/api/v1/user/search-by-username-and-email`,
+      {
+        method: "POST",
+        data: { username: usernameSearchKey, email: emailSearchKey },
+        headers: AuthService.authHeader(),
+      }
+    );
+
+    setListUsers(rs.data.data);
+    return rs.data.data;
+  };
+
+  const usernameSearchOnChange = (e) => {
+    setUsernameSearchKey(e.target.value);
+  };
+
+  const emailSearchOnChange = (e) => {
+    setEmailSearchKey(e.target.value);
   };
 
   const columns = [
@@ -72,24 +106,29 @@ const UserTable = () => {
       ellipsis: true,
       copyable: true,
     },
-
-    { key: 4, title: "Email", dataIndex: "email", ellipsis: true },
     {
-      key: 10,
+      key: 4,
+      title: "Name",
+      dataIndex: "username",
+      ellipsis: true,
+    },
+    { key: 5, title: "Email", dataIndex: "email", ellipsis: true },
+    {
+      key: 6,
       title: "Role",
       dataIndex: "role",
       ellipsis: true,
       width: "7%",
     },
     {
-      key: 5,
+      key: 7,
       title: "Provider",
       dataIndex: "provider",
       ellipsis: true,
       width: "7%",
     },
     {
-      key: 6,
+      key: 8,
       title: "Verify",
       dataIndex: "is_verified",
       ellipsis: true,
@@ -125,25 +164,29 @@ const UserTable = () => {
       },
     },
     {
-      key: 8,
+      key: 10,
       title: "Online State",
       dataIndex: "online_state",
-      initialValue: "all",
-      valueEnum: {
-        false: { text: "Offline", status: "Default" },
-        true: { text: "Online", status: "Processing", color: "green" },
-      },
       width: "10%",
+      render: (text, record) => {
+        if (record.online_state !== undefined) {
+          return record.online_state === false ? (
+            <Badge status="default" text="Offline" />
+          ) : (
+            <Badge status="processing" text="Online" color="green" />
+          );
+        }
+      },
     },
     {
-      key: 7,
+      key: 11,
       title: "Point",
       dataIndex: "point",
       ellipsis: true,
       width: "7%",
     },
     {
-      key: 11,
+      key: 12,
       title: "Action",
       valueType: "option",
       render: (_, row, index, action) => [
@@ -179,6 +222,7 @@ const UserTable = () => {
   ];
 
   useEffect(() => {
+    console.log("user table reload");
     setPageIsChaged(false);
     if (pageIsChaged === false) {
       axios({
@@ -188,7 +232,7 @@ const UserTable = () => {
       })
         .then((res) => {
           setListUsers(res.data.data);
-          console.log(res.data);
+          console.log(res.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -197,26 +241,56 @@ const UserTable = () => {
   }, [, pageIsChaged]);
 
   return (
-    <ProTable
-      columns={columns}
-      key="user"
-      actionRef={actionRef}
-      dataSource={listUsers}
-      editable={{
-        type: "multiple",
-      }}
-      rowKey="id"
-      search={{
-        labelWidth: "auto",
-      }}
-      pagination={{
-        pageSize: 5,
-        showTotal: (total, range) => (
-          <div>{`Showing ${range[0]}-${range[1]} of ${total} total items`}</div>
-        ),
-      }}
-      dateFormatter="string"
-    />
+    <>
+      <Form
+        className="search-form"
+        name="customized_form_controls"
+        layout="inline"
+        onFinish={handleSearchSubmit}
+      >
+        <Form.Item name="name" label="Name">
+          <Input
+            type="text"
+            placeholder="Input user's name"
+            value={usernameSearchKey}
+            onChange={(e) => usernameSearchOnChange(e)}
+            style={{ width: "auto" }}
+          />
+        </Form.Item>
+        <Form.Item name="email" label="Email">
+          <Input
+            type="text"
+            placeholder="Input user's email"
+            value={emailSearchKey}
+            onChange={(e) => emailSearchOnChange(e)}
+            style={{ width: "auto" }}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Search
+          </Button>
+        </Form.Item>
+      </Form>
+      <ProTable
+        columns={columns}
+        key="user"
+        actionRef={actionRef}
+        editable={{
+          type: "multiple",
+        }}
+        rowKey="id"
+        search={false}
+        pagination={{
+          pageSize: 5,
+          showTotal: (total, range) => (
+            <div>{`Showing ${range[0]}-${range[1]} of ${total} total items`}</div>
+          ),
+        }}
+        dateFormatter="string"
+        dataSource={listUsers}
+      />
+    </>
   );
 };
 

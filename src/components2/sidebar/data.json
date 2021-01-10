@@ -8,8 +8,14 @@
   {
     "icon": "user",
     "key": "users-list",
-    "label": "List of User Accounts",
+    "label": "Manage Accounts",
     "url": "/home/danh-sach-tai-khoan-nguoi-dung"
+  },
+  {
+    "icon": "game",
+    "key": "games-list",
+    "label": "Manage Games History",
+    "url": "/home/danh-sach-lich-su-game"
   },
   {
     "icon": "area-chart",

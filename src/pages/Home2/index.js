@@ -8,6 +8,7 @@ import { view as Sidebar } from "../../components2/sidebar";
 import { view as Overview } from "./overview";
 import { view as Topo } from "./topo";
 import UserTable from "./UserTable";
+import GameTable from "./GameTable";
 import styles from "./home.module.css";
 
 import AuthContext from "../../contexts/authContext";
@@ -82,6 +83,10 @@ const HomePage = () => {
               <Route
                 path="/home/danh-sach-tai-khoan-nguoi-dung"
                 component={UserTable}
+              />
+              <Route
+                path="/home/danh-sach-lich-su-game"
+                component={GameTable}
               />
             </div>
           </div>

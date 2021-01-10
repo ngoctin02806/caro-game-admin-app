@@ -7,6 +7,7 @@ import {
   UserOutlined,
   AreaChartOutlined,
   SettingOutlined,
+  TrophyOutlined,
 } from "@ant-design/icons";
 import styles from "./sidebar.module.css";
 import logo from "../../assets/images/logo.svg";
@@ -43,6 +44,7 @@ const Sidebar = ({ collapsed }) => {
                     {item.icon === "user" && <UserOutlined />}
                     {item.icon === "area-chart" && <AreaChartOutlined />}
                     {item.icon === "setting" && <SettingOutlined />}
+                    {item.icon === "game" && <TrophyOutlined />}
                     <span>{item.label}</span>
                   </span>
                 }
@@ -62,6 +64,7 @@ const Sidebar = ({ collapsed }) => {
                   {item.icon === "user" && <UserOutlined />}
                   {item.icon === "area-chart" && <AreaChartOutlined />}
                   {item.icon === "setting" && <SettingOutlined />}
+                  {item.icon === "game" && <TrophyOutlined />}
                   <span>{item.label}</span>
                 </Link>
               </Menu.Item>

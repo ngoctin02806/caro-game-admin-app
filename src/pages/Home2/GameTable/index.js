@@ -3,17 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import ProTable from "@ant-design/pro-table";
-import {
-  Avatar,
-  Badge,
-  Tag,
-  Popconfirm,
-  message,
-  Form,
-  Input,
-  Button,
-} from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Modal, Button } from "antd";
+
+import MessageList from "./MessageList";
 
 import { BASE_API_URL } from "../../../utils/constant";
 import AuthService from "../../../service/auth-service";
@@ -22,6 +14,8 @@ const UserTable = () => {
   const actionRef = useRef();
   const [listGames, setListGames] = useState([]);
   const [pageIsChaged, setPageIsChaged] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedGame, setSelectedGame] = useState("");
 
   const columns = [
     {
@@ -107,17 +101,23 @@ const UserTable = () => {
     {
       key: 8,
       title: "Total Steps",
-      dataIndex: "steps",
+      dataIndex: "steps_count",
       ellipsis: true,
-      render: (tex, record, index) => {
-        return record.steps.length;
-      },
     },
     {
       key: 9,
       title: "Action",
       valueType: "option",
-      render: (_, row, index, action) => [<a>Chat Detail</a>],
+      render: (_, row, index, action) => [
+        <a
+          onClick={() => {
+            setSelectedGame(row._id);
+            setModalVisible(true);
+          }}
+        >
+          Chat Detail
+        </a>,
+      ],
     },
   ];
 
@@ -160,6 +160,19 @@ const UserTable = () => {
         dateFormatter="string"
         dataSource={listGames}
       />
+      <Modal
+        title="Chat History"
+        centered
+        visible={modalVisible}
+        footer={
+          <Button type="primary" onClick={() => setModalVisible(false)}>
+            OK
+          </Button>
+        }
+        onCancel={() => setModalVisible(false)}
+      >
+        <MessageList gameId={selectedGame} />
+      </Modal>
     </>
   );
 };

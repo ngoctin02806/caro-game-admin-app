@@ -1,7 +1,6 @@
 import { StarTwoTone, LikeOutlined, MessageFilled } from '@ant-design/icons';
 import { List, Tag } from 'antd';
 import React from 'react';
-import { connect } from 'umi';
 import ArticleListContent from '../ArticleListContent';
 import styles from './index.less';
 
@@ -51,6 +50,4 @@ const Articles = (props) => {
   );
 };
 
-export default connect(({ accountAndcenter }) => ({
-  list: accountAndcenter.list,
-}))(Articles);
+export default Articles;

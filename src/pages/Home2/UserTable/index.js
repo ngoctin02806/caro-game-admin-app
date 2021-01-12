@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 import ProTable from "@ant-design/pro-table";
@@ -216,7 +217,9 @@ const UserTable = () => {
             <a>Unblock</a>
           </Popconfirm>
         ),
-        <a>Detail</a>,
+        <Link to={"/home/user/" + row._id}>
+          <a>Detail</a>
+        </Link>,
       ],
     },
   ];

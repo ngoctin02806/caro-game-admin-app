@@ -9,6 +9,7 @@ import { view as Overview } from "./overview";
 import { view as Topo } from "./topo";
 import UserTable from "./UserTable";
 import GameTable from "./GameTable";
+import UserDetail from "./UserTable/UserDetail";
 import styles from "./home.module.css";
 
 import AuthContext from "../../contexts/authContext";
@@ -88,6 +89,7 @@ const HomePage = () => {
                 path="/home/danh-sach-lich-su-game"
                 component={GameTable}
               />
+              <Route path="/home/user/:userId" component={UserDetail} />
             </div>
           </div>
         </div>

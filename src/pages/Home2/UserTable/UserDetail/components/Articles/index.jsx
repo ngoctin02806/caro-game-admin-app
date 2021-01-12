@@ -3,6 +3,7 @@ import { List, Avatar } from 'antd';
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
+import moment from 'moment';
 
 
 import Winner from '../../../../../../public/images/winner.png';
@@ -38,13 +39,14 @@ const Articles = (props) => {
         <List.Item.Meta
           avatar={<Avatar src={item.winner[0]._id === userId ? Winner : Loser} />}
           title={item.players[0]._id !== userId ? 
-          <p style={{margin: "0"}} >You competitor: <span>
+          <p style={{margin: "0"}} >Competitor: <span>
           <Link to={"/home/user/"+item.players[0]._id}>{item.players[0].username}</Link></span></p> 
           : 
-          <p style={{margin: "0"}} >You competitor: <span>
+          <p style={{margin: "0"}} >Competitor: <span>
           <Link to={"/home/user/"+item.players[1]._id}>{item.players[1].username}</Link></span></p>}
           description={"Total game steps: "+item.steps_count}
         />
+        <div>{moment(item.created_at).format("DD/MM/YYYY")}</div>
       </List.Item>
     )}
   />

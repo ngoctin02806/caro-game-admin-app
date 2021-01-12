@@ -19,27 +19,10 @@ import EmptyAvatar from "../../../../public/images/user.png";
 import { BASE_API_URL } from "../../../../utils/constant";
 import AuthService from "../../../../service/auth-service";
 
-const operationTabList = [
-  {
-    key: "articles",
-    tab: (
-      <span>
-        Games Played{" "}
-        <span
-          style={{
-            fontSize: 14,
-          }}
-        >
-          (8)
-        </span>
-      </span>
-    ),
-  },
-];
-
 const UserDetail = (props) => {
   const [tabKey, setTabKey] = useState("articles");
   const [currentUser, setCurrentUser] = useState({});
+  const [numGame, setNumGame] = useState(0);
   const dataLoading = !(currentUser && Object.keys(currentUser).length);
   const { userId } = useParams();
 
@@ -58,6 +41,24 @@ const UserDetail = (props) => {
   const onTabChange = (key) => {
     setTabKey(key);
   };
+
+  const operationTabList = [
+    {
+      key: "articles",
+      tab: (
+        <span>
+          Games Played{" "}
+          <span
+            style={{
+              fontSize: 14,
+            }}
+          >
+            ({numGame})
+          </span>
+        </span>
+      ),
+    },
+  ];
 
   console.log("user detail reload");
   return (
@@ -155,7 +156,10 @@ const UserDetail = (props) => {
             activeTabKey={tabKey}
             onTabChange={onTabChange}
           >
-            <Articles />
+            <Articles
+              userId={currentUser._id}
+              setNumGame={(num) => setNumGame(num)}
+            />
           </Card>
         </Col>
       </Row>

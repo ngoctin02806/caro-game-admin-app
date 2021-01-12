@@ -1,4 +1,4 @@
-import { StarTwoTone, LikeOutlined, MessageFilled } from '@ant-design/icons';
+
 import { List, Avatar } from 'antd';
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
@@ -6,11 +6,11 @@ import axios from 'axios';
 import moment from 'moment';
 
 
-import Winner from '../../../../../../public/images/winner.png';
-import Loser from '../../../../../../public/images/loser.png';
+import Winner from '../../../../../public/images/winner.png';
+import Loser from '../../../../../public/images/loser.png';
 
-import { BASE_API_URL } from "../../../../../../utils/constant";
-import AuthService from "../../../../../../service/auth-service";
+import { BASE_API_URL } from "../../../../../utils/constant";
+import AuthService from "../../../../../service/auth-service"; 
 
 const Articles = (props) => {
   const { userId, setNumGame } = props;
@@ -35,7 +35,7 @@ const Articles = (props) => {
     itemLayout="horizontal"
     dataSource={userGames}
     renderItem={item => (
-      <List.Item>
+      <List.Item key={item._id}>
         <List.Item.Meta
           avatar={<Avatar src={item.winner[0]._id === userId ? Winner : Loser} />}
           title={item.players[0]._id !== userId ? 

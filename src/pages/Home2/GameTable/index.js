@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import "./styles.css";
 
 import ProTable from "@ant-design/pro-table";
-import { Modal, Button } from "antd";
+import { Modal, Button, PageHeader } from "antd";
 
 import MessageList from "./MessageList";
 
@@ -16,6 +18,15 @@ const UserTable = () => {
   const [pageIsChaged, setPageIsChaged] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedGame, setSelectedGame] = useState("");
+
+  const routes = [
+    {
+      breadcrumbName: "Home",
+    },
+    {
+      breadcrumbName: "Manage Games History",
+    },
+  ];
 
   const columns = [
     {
@@ -141,39 +152,50 @@ const UserTable = () => {
   }, [, pageIsChaged]);
 
   return (
-    <>
-      <ProTable
-        columns={columns}
-        key="user"
-        actionRef={actionRef}
-        editable={{
-          type: "multiple",
-        }}
-        rowKey="id"
-        search={false}
-        pagination={{
-          pageSize: 5,
-          showTotal: (total, range) => (
-            <div>{`Showing ${range[0]}-${range[1]} of ${total} total items`}</div>
-          ),
-        }}
-        dateFormatter="string"
-        dataSource={listGames}
-      />
-      <Modal
-        title="Chat History"
-        centered
-        visible={modalVisible}
-        footer={
-          <Button type="primary" onClick={() => setModalVisible(false)}>
-            OK
-          </Button>
-        }
-        onCancel={() => setModalVisible(false)}
-      >
-        <MessageList gameId={selectedGame} />
-      </Modal>
-    </>
+    <HelmetProvider>
+      <Helmet>
+        <title>Manage Games History</title>
+      </Helmet>
+      <>
+        <PageHeader
+          className="site-page-header"
+          title="List of Played Games"
+          breadcrumb={{ routes }}
+          subTitle=""
+        />
+        <ProTable
+          columns={columns}
+          key="user"
+          actionRef={actionRef}
+          editable={{
+            type: "multiple",
+          }}
+          rowKey="id"
+          search={false}
+          pagination={{
+            pageSize: 5,
+            showTotal: (total, range) => (
+              <div>{`Showing ${range[0]}-${range[1]} of ${total} total items`}</div>
+            ),
+          }}
+          dateFormatter="string"
+          dataSource={listGames}
+        />
+        <Modal
+          title="Chat History"
+          centered
+          visible={modalVisible}
+          footer={
+            <Button type="primary" onClick={() => setModalVisible(false)}>
+              OK
+            </Button>
+          }
+          onCancel={() => setModalVisible(false)}
+        >
+          <MessageList gameId={selectedGame} />
+        </Modal>
+      </>
+    </HelmetProvider>
   );
 };
 

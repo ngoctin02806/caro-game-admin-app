@@ -2,7 +2,7 @@
   {
     "icon": "home",
     "key": "overview",
-    "label": "总览",
+    "label": "Overview",
     "url": "/home/overview"
   },
   {
@@ -51,7 +51,7 @@
   {
     "icon": "setting",
     "key": "setting",
-    "label": "设置",
+    "label": "Setting",
     "url": "/home/setting"
   }
 ]

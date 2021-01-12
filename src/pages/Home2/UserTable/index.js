@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import "./styles.css";
 
 import ProTable from "@ant-design/pro-table";
 import {
+  PageHeader,
   Avatar,
   Badge,
   Tag,
@@ -13,6 +15,7 @@ import {
   Form,
   Input,
   Button,
+  Card,
 } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -25,6 +28,15 @@ const UserTable = () => {
   const [pageIsChaged, setPageIsChaged] = useState(false);
   const [usernameSearchKey, setUsernameSearchKey] = useState("");
   const [emailSearchKey, setEmailSearchKey] = useState("");
+
+  const routes = [
+    {
+      breadcrumbName: "Home",
+    },
+    {
+      breadcrumbName: "Manage Accounts",
+    },
+  ];
 
   const confirmUnblockUser = (userId) => {
     axios(`${BASE_API_URL}/api/v1/user/unblock/${userId}`, {
@@ -244,56 +256,69 @@ const UserTable = () => {
   }, [, pageIsChaged]);
 
   return (
-    <>
-      <Form
-        className="search-form"
-        name="customized_form_controls"
-        layout="inline"
-        onFinish={handleSearchSubmit}
-      >
-        <Form.Item name="name" label="Name">
-          <Input
-            type="text"
-            placeholder="Input user's name"
-            value={usernameSearchKey}
-            onChange={(e) => usernameSearchOnChange(e)}
-            style={{ width: "auto" }}
+    <HelmetProvider>
+      <Helmet>
+        <title>Manage Accounts</title>
+      </Helmet>
+      <>
+        <PageHeader
+          className="site-page-header"
+          title="List of User's Accounts"
+          breadcrumb={{ routes }}
+          subTitle=""
+        />
+        <Card>
+          <Form
+            className="search-form"
+            name="customized_form_controls"
+            layout="inline"
+            onFinish={handleSearchSubmit}
+          >
+            <Form.Item name="name" label="Name">
+              <Input
+                type="text"
+                placeholder="Input user's name"
+                value={usernameSearchKey}
+                onChange={(e) => usernameSearchOnChange(e)}
+                style={{ width: "auto" }}
+              />
+            </Form.Item>
+            <Form.Item name="email" label="Email">
+              <Input
+                type="text"
+                placeholder="Input user's email"
+                value={emailSearchKey}
+                onChange={(e) => emailSearchOnChange(e)}
+                style={{ width: "auto" }}
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Search
+              </Button>
+            </Form.Item>
+          </Form>
+          <ProTable
+            columns={columns}
+            key="user"
+            actionRef={actionRef}
+            editable={{
+              type: "multiple",
+            }}
+            rowKey="id"
+            search={false}
+            pagination={{
+              pageSize: 5,
+              showTotal: (total, range) => (
+                <div>{`Showing ${range[0]}-${range[1]} of ${total} total items`}</div>
+              ),
+            }}
+            dateFormatter="string"
+            dataSource={listUsers}
           />
-        </Form.Item>
-        <Form.Item name="email" label="Email">
-          <Input
-            type="text"
-            placeholder="Input user's email"
-            value={emailSearchKey}
-            onChange={(e) => emailSearchOnChange(e)}
-            style={{ width: "auto" }}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Search
-          </Button>
-        </Form.Item>
-      </Form>
-      <ProTable
-        columns={columns}
-        key="user"
-        actionRef={actionRef}
-        editable={{
-          type: "multiple",
-        }}
-        rowKey="id"
-        search={false}
-        pagination={{
-          pageSize: 5,
-          showTotal: (total, range) => (
-            <div>{`Showing ${range[0]}-${range[1]} of ${total} total items`}</div>
-          ),
-        }}
-        dateFormatter="string"
-        dataSource={listUsers}
-      />
-    </>
+        </Card>
+      </>
+    </HelmetProvider>
   );
 };
 

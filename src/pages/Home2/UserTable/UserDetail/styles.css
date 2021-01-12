@@ -1,3 +1,8 @@
+.site-page-header {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
 .avatarHolder {
   margin-bottom: 24px;
   text-align: center;
@@ -57,4 +62,8 @@
 }
 .tabsCard :global .ant-card-head {
   padding: 0 16px;
+}
+
+.user-id {
+  word-wrap: break-word;
 }

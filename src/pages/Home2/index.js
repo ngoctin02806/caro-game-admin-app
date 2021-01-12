@@ -6,7 +6,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { view as Header } from "../../components2/header";
 import { view as Sidebar } from "../../components2/sidebar";
 import { view as Overview } from "./overview";
-import { view as Topo } from "./topo";
 import UserTable from "./UserTable";
 import GameTable from "./GameTable";
 import UserDetail from "./UserTable/UserDetail";
@@ -79,7 +78,10 @@ const HomePage = () => {
             <div className={`${styles.header} ant-layout-header`}>
               <Header collapsed={collapsed} setCollapsed={setCollapsed} />
             </div>
-            <div className={`${styles.content} ant-layout-content`}>
+            <div
+              className={`${styles.content} ant-layout-content`}
+              style={{ marginTop: "0px" }}
+            >
               <Route path="/home/overview" component={Overview} />
               <Route
                 path="/home/danh-sach-tai-khoan-nguoi-dung"

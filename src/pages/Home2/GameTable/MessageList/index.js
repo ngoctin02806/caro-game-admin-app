@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { List, Avatar } from "antd";
+import { List, Avatar, message } from "antd";
 import InfiniteScroll from "react-infinite-scroller";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -36,6 +36,7 @@ const MessageItem = (props) => {
       })
       .catch((err) => {
         console.log(err.response.data.message);
+        message.error(err.response.data.errors[0].message);
         setData([]);
       });
   }, [props.gameId]);

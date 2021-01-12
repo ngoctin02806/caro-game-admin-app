@@ -131,7 +131,7 @@ const UserTable = () => {
         headers: AuthService.authHeader(),
       })
         .then((res) => {
-          setListGames(res.data.data.reverse());
+          setListGames(res.data.data);
           console.log(res.data.data);
         })
         .catch((err) => {

@@ -20,22 +20,31 @@
   {
     "icon": "area-chart",
     "key": "sub-res",
-    "label": "一级菜单",
+    "label": "Manage Stats by Chart",
     "children": [
       {
+        "icon": "coin",
         "key": "rrs",
-        "label": "二级菜单001",
-        "url": "/home/rrs"
+        "label": "Statistics of Coin Sold",
+        "url": "/home/stats/coins"
       },
       {
-        "key": "hms",
-        "label": "二级菜单002",
-        "url": "/home/hms"
+        "icon": "game",
+        "key": "game",
+        "label": "Statistics of Games",
+        "url": "/home/stats/games"
       },
       {
-        "key": "mm",
-        "label": "二级菜单003",
-        "url": "/home/mm"
+        "icon": "message",
+        "key": "message",
+        "label": "Statistics of Messages",
+        "url": "/home/stats/messages"
+      },
+      {
+        "icon": "account",
+        "key": "account",
+        "label": "Statistics of Accounts",
+        "url": "/home/stats/accounts"
       }
     ]
   },

@@ -8,6 +8,8 @@ import {
   AreaChartOutlined,
   SettingOutlined,
   TrophyOutlined,
+  DollarCircleOutlined,
+  MessageOutlined,
 } from "@ant-design/icons";
 import styles from "./sidebar.module.css";
 import logo from "../../assets/images/logo.svg";
@@ -51,7 +53,17 @@ const Sidebar = ({ collapsed }) => {
               >
                 {item.children.map((subItem) => (
                   <Menu.Item key={subItem.key}>
-                    <Link to={subItem.url}>{subItem.label}</Link>
+                    <Link to={subItem.url}>
+                      {
+                        <span>
+                          {subItem.icon === "coin" && <DollarCircleOutlined />}
+                          {subItem.icon === "account" && <UserOutlined />}
+                          {subItem.icon === "game" && <TrophyOutlined />}
+                          {subItem.icon === "message" && <MessageOutlined />}
+                          <span>{subItem.label}</span>
+                        </span>
+                      }
+                    </Link>
                   </Menu.Item>
                 ))}
               </SubMenu>

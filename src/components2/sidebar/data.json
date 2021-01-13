@@ -1,0 +1,57 @@
+[
+  {
+    "icon": "home",
+    "key": "overview",
+    "label": "Overview",
+    "url": "/home/overview"
+  },
+  {
+    "icon": "user",
+    "key": "users-list",
+    "label": "Manage Accounts",
+    "url": "/home/danh-sach-tai-khoan-nguoi-dung"
+  },
+  {
+    "icon": "game",
+    "key": "games-list",
+    "label": "Manage Games History",
+    "url": "/home/danh-sach-lich-su-game"
+  },
+  {
+    "icon": "area-chart",
+    "key": "sub-res",
+    "label": "Manage Stats by Chart",
+    "children": [
+      {
+        "icon": "coin",
+        "key": "rrs",
+        "label": "Statistics of Coin Sold",
+        "url": "/home/thong-ke/coin"
+      },
+      {
+        "icon": "game",
+        "key": "game",
+        "label": "Statistics of Games",
+        "url": "/home/thong-ke/game"
+      },
+      {
+        "icon": "message",
+        "key": "message",
+        "label": "Statistics of Messages",
+        "url": "/home/thong-ke/tin-nhan"
+      },
+      {
+        "icon": "account",
+        "key": "account",
+        "label": "Statistics of Accounts",
+        "url": "/home/thong-ke/tai-khoan"
+      }
+    ]
+  },
+  {
+    "icon": "setting",
+    "key": "setting",
+    "label": "Setting",
+    "url": "/home/cai-dat"
+  }
+]

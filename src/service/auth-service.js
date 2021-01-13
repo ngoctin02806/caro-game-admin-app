@@ -2,8 +2,17 @@ const getCurrentUser = () => {
   return localStorage.getItem("accessToken");
 };
 
-const logout = () => {
-  localStorage.removeItem("accessToken");
+const getExpired = () => {
+  return localStorage.getItem("expiredTokenDate");
 };
 
-export default { getCurrentUser, logout };
+const logout = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("expiredTokenDate");
+};
+
+const authHeader = () => {
+  return { "x-auth-token": localStorage.getItem("accessToken") };
+};
+
+export default { getCurrentUser, getExpired, logout, authHeader };

@@ -9,6 +9,10 @@ import { view as Overview } from "./overview";
 import UserTable from "./UserTable";
 import GameTable from "./GameTable";
 import UserDetail from "./UserTable/UserDetail";
+import CoinSoldStats from "./Stats/CoinSoldStats";
+import PlayedGameStats from "./Stats/PlayedGameStats";
+import MessagesStats from "./Stats/MessageStats";
+import AccountStats from "./Stats/AccountStats";
 import styles from "./home.module.css";
 
 import AuthContext from "../../contexts/authContext";
@@ -92,6 +96,10 @@ const HomePage = () => {
                 component={GameTable}
               />
               <Route path="/home/user/:userId" component={UserDetail} />
+              <Route path="/home/thong-ke/coin" component={CoinSoldStats} />
+              <Route path="/home/thong-ke/game" component={PlayedGameStats} />
+              <Route path="/home/thong-ke/tin-nhan" component={MessagesStats} />
+              <Route path="/home/thong-ke/tai-khoan" component={AccountStats} />
             </div>
           </div>
         </div>

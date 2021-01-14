@@ -2,48 +2,48 @@
   {
     "icon": "home",
     "key": "overview",
-    "label": "Overview",
+    "label": "Trang chủ",
     "url": "/home/overview"
   },
   {
     "icon": "user",
     "key": "users-list",
-    "label": "Manage Accounts",
+    "label": "Quản lý tài khoản người dùng",
     "url": "/home/danh-sach-tai-khoan-nguoi-dung"
   },
   {
     "icon": "game",
     "key": "games-list",
-    "label": "Manage Games History",
+    "label": "Quản lý lịch sử game",
     "url": "/home/danh-sach-lich-su-game"
   },
   {
     "icon": "area-chart",
     "key": "sub-res",
-    "label": "Manage Stats by Chart",
+    "label": "Quản lý thống kê",
     "children": [
       {
         "icon": "coin",
         "key": "rrs",
-        "label": "Statistics of Coin Sold",
+        "label": "Thống kê bán coin",
         "url": "/home/thong-ke/coin"
       },
       {
         "icon": "game",
         "key": "game",
-        "label": "Statistics of Games",
+        "label": "Thống kê game",
         "url": "/home/thong-ke/game"
       },
       {
         "icon": "message",
         "key": "message",
-        "label": "Statistics of Messages",
+        "label": "Thống kê tin nhắn",
         "url": "/home/thong-ke/tin-nhan"
       },
       {
         "icon": "account",
         "key": "account",
-        "label": "Statistics of Accounts",
+        "label": "Thống kê tài khoản",
         "url": "/home/thong-ke/tai-khoan"
       }
     ]
@@ -51,7 +51,7 @@
   {
     "icon": "setting",
     "key": "setting",
-    "label": "Setting",
+    "label": "Cài đặt",
     "url": "/home/cai-dat"
   }
 ]

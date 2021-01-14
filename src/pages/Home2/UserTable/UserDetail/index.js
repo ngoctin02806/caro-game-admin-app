@@ -48,7 +48,7 @@ const UserDetail = (props) => {
       key: "articles",
       tab: (
         <span>
-          Games Played{" "}
+          Số trận đã chơi{" "}
           <span
             style={{
               fontSize: 14,
@@ -63,10 +63,10 @@ const UserDetail = (props) => {
 
   const routes = [
     {
-      breadcrumbName: "Home",
+      breadcrumbName: "Trang chủ",
     },
     {
-      breadcrumbName: "Manage Accounts",
+      breadcrumbName: "Quản lý tài khoản",
     },
     {
       breadcrumbName: currentUser.username,
@@ -82,7 +82,7 @@ const UserDetail = (props) => {
       <HelmetProvider>
         <PageHeader
           className="site-page-header"
-          title="User Profile"
+          title="Hồ sơ người dùng"
           breadcrumb={{ routes }}
           subTitle=""
         />
@@ -144,7 +144,7 @@ const UserDetail = (props) => {
                     </div>
                     <Divider dashed />
                     <div className="tags">
-                      <div className="tagsTitle">Status</div>
+                      <div className="tagsTitle">Trạng thái</div>
                       {currentUser.is_blocked ? (
                         <Tag
                           key="1"

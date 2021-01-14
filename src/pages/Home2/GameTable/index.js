@@ -21,10 +21,10 @@ const UserTable = () => {
 
   const routes = [
     {
-      breadcrumbName: "Home",
+      breadcrumbName: "Trang chủ",
     },
     {
-      breadcrumbName: "Manage Games History",
+      breadcrumbName: "Quản lý lịch sử game",
     },
   ];
 
@@ -154,12 +154,12 @@ const UserTable = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Manage Games History</title>
+        <title>Quản lý lịch sử game</title>
       </Helmet>
       <>
         <PageHeader
           className="site-page-header"
-          title="List of Played Games"
+          title="Danh sách các trận đấu"
           breadcrumb={{ routes }}
           subTitle=""
         />
@@ -175,14 +175,14 @@ const UserTable = () => {
           pagination={{
             pageSize: 5,
             showTotal: (total, range) => (
-              <div>{`Showing ${range[0]}-${range[1]} of ${total} total items`}</div>
+              <div>{`Đang hiện ${range[0]}-${range[1]} trên ${total} trận đấu`}</div>
             ),
           }}
           dateFormatter="string"
           dataSource={listGames}
         />
         <Modal
-          title="Chat History"
+          title="Lịch sử chat"
           centered
           visible={modalVisible}
           footer={

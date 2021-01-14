@@ -12,25 +12,25 @@ import AuthService from "../../../../service/auth-service";
 const PlayedGameStats = () => {
   const routes = [
     {
-      breadcrumbName: "Home",
+      breadcrumbName: "Trang chủ",
     },
     {
-      breadcrumbName: "Stats",
+      breadcrumbName: "Thống kê",
     },
     {
-      breadcrumbName: "Stats of Played Games",
+      breadcrumbName: "Thống kê các trận đã đấu",
     },
   ];
 
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Stats of Played Games</title>
+        <title>Thống kê các trận đã đấu</title>
       </Helmet>
       <>
         <PageHeader
           className="site-page-header"
-          title="Stats of Played Games"
+          title="Thống kê các trận đã đấu"
           breadcrumb={{ routes }}
           subTitle=""
         />

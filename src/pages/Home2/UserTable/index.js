@@ -31,10 +31,10 @@ const UserTable = () => {
 
   const routes = [
     {
-      breadcrumbName: "Home",
+      breadcrumbName: "Trang chủ",
     },
     {
-      breadcrumbName: "Manage Accounts",
+      breadcrumbName: "Quản lý tài khoản",
     },
   ];
 
@@ -110,7 +110,7 @@ const UserTable = () => {
           return <Avatar src={record.avatar} />;
         else return <Avatar icon={<UserOutlined />} />;
       },
-      width: "5%",
+      width: "7%",
     },
     {
       key: 3,
@@ -207,12 +207,12 @@ const UserTable = () => {
           <Popconfirm
             key={1}
             placement="top"
-            title="Block this user ?"
+            title="Khóa tài khoản này ?"
             onConfirm={() => confirmBlockUser(row._id)}
             okText="Yes"
             cancelText="No"
           >
-            <a>Block</a>
+            <a>Khóa</a>
           </Popconfirm>
         ),
         ,
@@ -220,17 +220,17 @@ const UserTable = () => {
           <Popconfirm
             key={2}
             placement="top"
-            title="Unblock this user ?"
+            title="Mở khóa tài khoản này ?"
             onConfirm={() => confirmUnblockUser(row._id)}
             okText="Yes"
             cancelText="No"
           >
             {" "}
-            <a>Unblock</a>
+            <a>Mở khóa</a>
           </Popconfirm>
         ),
         <Link to={"/home/user/" + row._id}>
-          <a>Detail</a>
+          <a>Chi tiết</a>
         </Link>,
       ],
     },
@@ -258,12 +258,12 @@ const UserTable = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Manage Accounts</title>
+        <title>Quản lý tài khoản</title>
       </Helmet>
       <>
         <PageHeader
           className="site-page-header"
-          title="List of User's Accounts"
+          title="Danh sách tài khoản người dùng"
           breadcrumb={{ routes }}
           subTitle=""
         />
@@ -277,7 +277,7 @@ const UserTable = () => {
             <Form.Item name="name" label="Name">
               <Input
                 type="text"
-                placeholder="Input user's name"
+                placeholder="Nhập tên người dùng"
                 value={usernameSearchKey}
                 onChange={(e) => usernameSearchOnChange(e)}
                 style={{ width: "auto" }}
@@ -286,7 +286,7 @@ const UserTable = () => {
             <Form.Item name="email" label="Email">
               <Input
                 type="text"
-                placeholder="Input user's email"
+                placeholder="Nhập email người dùng"
                 value={emailSearchKey}
                 onChange={(e) => emailSearchOnChange(e)}
                 style={{ width: "auto" }}
@@ -294,7 +294,7 @@ const UserTable = () => {
             </Form.Item>
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                Search
+                Tìm kiếm
               </Button>
             </Form.Item>
           </Form>
@@ -310,7 +310,7 @@ const UserTable = () => {
             pagination={{
               pageSize: 5,
               showTotal: (total, range) => (
-                <div>{`Showing ${range[0]}-${range[1]} of ${total} total items`}</div>
+                <div>{`Đang hiện ${range[0]}-${range[1]} trên ${total} tài khoản`}</div>
               ),
             }}
             dateFormatter="string"

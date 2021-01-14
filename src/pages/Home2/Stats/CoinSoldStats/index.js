@@ -112,7 +112,7 @@ const CoinSoldStats = () => {
 
   const routes = [
     {
-      breadcrumbName: "Home",
+      breadcrumbName: "Trang chủ",
     },
     {
       breadcrumbName: "Thống kê",
@@ -364,16 +364,16 @@ const CoinSoldStats = () => {
         />
         <Card className="chart-card">
           <Tabs defaultActiveKey="1">
-            <TabPane tab="Day" key="1">
+            <TabPane tab="Ngày" key="1">
               <Line className="chart" {...configChartDay} />
             </TabPane>
-            <TabPane tab="Week" key="2">
+            <TabPane tab="Tuần" key="2">
               <Line className="chart" {...configChartWeek} />
             </TabPane>
-            <TabPane tab="Month" key="3">
+            <TabPane tab="Tháng" key="3">
               <Line className="chart" {...configChartMonth} />
             </TabPane>
-            <TabPane tab="Year" key="4">
+            <TabPane tab="Năm" key="4">
               <Line className="chart" {...configChartYear} />
             </TabPane>
           </Tabs>

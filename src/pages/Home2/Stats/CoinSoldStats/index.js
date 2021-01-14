@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import "./styles.css";
-import { Line } from "@ant-design/charts";
-import { Card, PageHeader, Tabs, ProTable } from "antd";
+import { Line, Pie } from "@ant-design/charts";
+import { Card, PageHeader, Tabs, Row, Col, Table } from "antd";
 
 import { BASE_API_URL } from "../../../../utils/constant";
 import AuthService from "../../../../service/auth-service";
@@ -16,6 +16,8 @@ const CoinSoldStats = () => {
   const [statsByWeek, setStatsByWeek] = useState([]);
   const [statsByMonth, setStatsByMonth] = useState([]);
   const [statsByYear, setStatsByYear] = useState([]);
+  const [topTopupUser, setTopUpUser] = useState([]);
+  const [statsType, setStatsType] = useState([]);
 
   useEffect(() => {
     axios(
@@ -77,6 +79,35 @@ const CoinSoldStats = () => {
       .catch((err) => {
         console.log(err.response.data);
       });
+
+    axios(`${BASE_API_URL}/api/v1/admin-stats/transactions/top-topup-users`, {
+      method: "GET",
+      headers: AuthService.authHeader(),
+    })
+      .then((res) => {
+        const data = res.data.data;
+        data.map((item, pos) => (item.index = pos + 1));
+        setTopUpUser(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+
+    axios(
+      `${BASE_API_URL}/api/v1/admin-stats/transactions/stats-transaction-type`,
+      {
+        method: "GET",
+        headers: AuthService.authHeader(),
+      }
+    )
+      .then((res) => {
+        setStatsType(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }, []);
 
   const routes = [
@@ -84,10 +115,10 @@ const CoinSoldStats = () => {
       breadcrumbName: "Home",
     },
     {
-      breadcrumbName: "Stats",
+      breadcrumbName: "Thống kê",
     },
     {
-      breadcrumbName: "Stats of Coin Sold",
+      breadcrumbName: "Thống kê doanh thu bán coin",
     },
   ];
 
@@ -280,15 +311,54 @@ const CoinSoldStats = () => {
     interactions: [{ type: "marker-active" }],
   };
 
+  const columns = [
+    {
+      title: "No.",
+      dataIndex: "index",
+      key: "index",
+    },
+    {
+      title: "Tên",
+      dataIndex: "user",
+      key: "user",
+    },
+    {
+      title: "Số tiền đã nạp",
+      dataIndex: "total_amount",
+      key: "total_amount",
+    },
+  ];
+
+  const transactionsTypeConfig = {
+    appendPadding: 10,
+    data: statsType,
+    angleField: "total_amount",
+    colorField: "type",
+    radius: 0.9,
+    label: {
+      type: "inner",
+      offset: "-30%",
+      content: function content(_ref) {
+        var percent = _ref.percent;
+        return "".concat(Math.round(percent * 100), "%");
+      },
+      style: {
+        fontSize: 14,
+        textAlign: "center",
+      },
+    },
+    interactions: [{ type: "element-active" }],
+  };
+
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Stats of Coin Sold</title>
+        <title>Thống kê doanh thu bán coin</title>
       </Helmet>
       <>
         <PageHeader
           className="site-page-header"
-          title="Stats of Coin Sold"
+          title="Thống kê doanh thu bán coin"
           breadcrumb={{ routes }}
           subTitle=""
         />
@@ -308,7 +378,28 @@ const CoinSoldStats = () => {
             </TabPane>
           </Tabs>
         </Card>
-        <Card>table</Card>
+        <Row>
+          <Col span={11}>
+            <Card
+              style={{ height: "100%" }}
+              title="Top 10 người dùng nạp coin nhiều nhất"
+            >
+              <Table
+                dataSource={topTopupUser}
+                columns={columns}
+                pagination={false}
+              />
+            </Card>
+          </Col>
+          <Col offset={2} span={11}>
+            <Card
+              style={{ height: "100%" }}
+              title="Tỉ lệ phương thức thanh toán"
+            >
+              <Pie {...transactionsTypeConfig} />
+            </Card>
+          </Col>
+        </Row>
       </>
     </HelmetProvider>
   );

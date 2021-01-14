@@ -174,6 +174,13 @@ const UserTable = () => {
               {record.is_blocked ? "Blocked" : "Active"}
             </Tag>
           );
+        else {
+          return (
+            <Tag color="success" key={false}>
+              Active
+            </Tag>
+          );
+        }
       },
     },
     {
@@ -203,7 +210,7 @@ const UserTable = () => {
       title: "Action",
       valueType: "option",
       render: (_, row, index, action) => [
-        row.is_blocked === false && (
+        (row.is_blocked === false || row.is_blocked === undefined) && (
           <Popconfirm
             key={1}
             placement="top"

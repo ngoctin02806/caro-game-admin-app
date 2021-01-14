@@ -6,3 +6,7 @@
 .chart-card {
   margin-bottom: 20px;
 }
+
+.chart {
+  min-height: 400px;
+}
